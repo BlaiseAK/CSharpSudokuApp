@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace CSharpSudokuApp.Model
 {
-    class ButtonTagData
+    public class ButtonTagData
     {
-        public int xPos { get; }
-        public int yPos { get; }
+        public int XPos { get; }
+        public int YPos { get; }
 
-        public int value { get; set; }
+        public int Value { get; set; }
 
-        ButtonTagData()
+        public ButtonTagData()
         {
-            xPos = 0;
-            yPos = 0;
+            XPos = 0;
+            YPos = 0;
         }
 
-        ButtonTagData(int x, int y)
+        public ButtonTagData(int x, int y)
         {
-            xPos = x;
-            yPos = y;
+            XPos = x;
+            YPos = y;
         }
 
-        ButtonTagData(int x, int y, int val)
+        public ButtonTagData(int x, int y, int val)
         {
-            xPos = x;
-            yPos = y;
-            value = val;
+            XPos = x;
+            YPos = y;
+            Value = val;
         }
     }
 }

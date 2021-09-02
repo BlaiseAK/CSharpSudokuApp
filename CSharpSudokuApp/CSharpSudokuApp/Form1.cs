@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSharpSudokuApp.Model;
 
 namespace CSharpSudokuApp
 {
@@ -16,14 +17,32 @@ namespace CSharpSudokuApp
         {
             InitializeComponent();
             createRadioBtns();
+            createSudokuButtons();
         }
 
         public int activeNumber = 0;
-        
-        private void radioBtn_CheckedChanged(Object sender, EventArgs e)
+
+        public void createSudokuButtons()
         {
-            RadioButton rBtn = sender as RadioButton;
-            activeNumber = int.Parse(rBtn.Text);
+            for (int r = 1; r <= 9; r++)
+            {
+                for (int c = 1; c <= 9; c++)
+                {
+                    Button sBtn = new Button()
+                    {
+                        Font = new Font(FontFamily.GenericSansSerif, 15),
+                        ForeColor = Color.Black,
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Name = $"r{r}c{c}",
+                        Size = new Size(30, 30),
+                        Top = (r * 40),
+                        Left = (c * 40),
+                        Tag = new ButtonTagData(c, r)
+                    };
+                    sBtn.Click += sBtn_Click;
+                    splitContainer1.Panel1.Controls.Add(sBtn);
+                }
+            }
         }
 
         public void createRadioBtns()
@@ -44,6 +63,21 @@ namespace CSharpSudokuApp
                 rBtn.CheckedChanged += radioBtn_CheckedChanged;
                 splitContainer1.Panel2.Controls.Add(rBtn);
             }
+        }
+
+        private void sBtn_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Text = activeNumber.ToString();
+            ButtonTagData newTagData = (ButtonTagData) btn.Tag;
+            newTagData.Value = activeNumber;
+            Console.WriteLine($"C{newTagData.XPos}R{newTagData.YPos}");
+        }
+
+        private void radioBtn_CheckedChanged(Object sender, EventArgs e)
+        {
+            RadioButton rBtn = sender as RadioButton;
+            activeNumber = int.Parse(rBtn.Text);
         }
     }
 }
