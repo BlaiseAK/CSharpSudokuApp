@@ -21,12 +21,13 @@ namespace CSharpSudokuApp
         }
 
         public int activeNumber = 0;
+        public int[,] playerArry = new int[9, 9];
 
         public void createSudokuButtons()
         {
-            for (int r = 1; r <= 9; r++)
+            for (int r = 0; r < 9; r++)
             {
-                for (int c = 1; c <= 9; c++)
+                for (int c = 0; c < 9; c++)
                 {
                     Button sBtn = new Button()
                     {
@@ -71,6 +72,8 @@ namespace CSharpSudokuApp
             btn.Text = activeNumber.ToString();
             ButtonTagData newTagData = (ButtonTagData) btn.Tag;
             newTagData.Value = activeNumber;
+            playerArry[newTagData.YPos, newTagData.XPos] = newTagData.Value;
+            btn.Tag = newTagData;
             Console.WriteLine($"C{newTagData.XPos}R{newTagData.YPos}");
         }
 
